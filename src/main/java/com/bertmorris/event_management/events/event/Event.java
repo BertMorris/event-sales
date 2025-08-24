@@ -1,0 +1,119 @@
+package com.bertmorris.event_management.events.event;
+
+import java.util.Date;
+
+import com.bertmorris.event_management.contacts.Contact;
+import com.bertmorris.event_management.events.event.type.EventType;
+import com.bertmorris.event_management.events.venue.Venue;
+import com.bertmorris.event_management.users.User;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "events")
+public class Event {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private User owner;
+    private EventStatus status;
+    private EventType type;
+    private Contact contact;
+    private String company;
+    private Date startDate;
+    private Date endDate;
+    private Venue venue;
+    private Integer guests;
+    private Integer rooms;
+
+    public Event() {}
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public User getOwner() {
+        return this.owner;
+    }
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public EventStatus getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(EventStatus status) {
+        this.status = status;
+    }
+
+    public EventType getType() {
+        return this.type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public Contact getContact() {
+        return this.contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public String getCompany() {
+        return this.company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public Date getStartDate() {
+        return this.startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return this.endDate;
+    }   
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Venue getVenue() {
+        return this.venue;
+    }
+
+    public void setVenue(Venue venue) {
+        this.venue = venue;
+    }
+
+    public Integer getGuests() {
+        return this.guests;
+    }
+
+    public void setGuests(Integer guests) {
+        this.guests = guests;
+    }
+
+    public Integer getRooms() {
+        return this.rooms;
+    }
+
+    public void setRooms(Integer rooms) {
+        this.rooms = rooms;
+    }
+    
+}

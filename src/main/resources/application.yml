@@ -1,1 +1,5 @@
-name: event-management
+spring:
+  application:
+    name: event-management
+server:
+  port: 8080
