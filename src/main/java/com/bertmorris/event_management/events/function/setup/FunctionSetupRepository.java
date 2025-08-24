@@ -1,0 +1,13 @@
+package com.bertmorris.event_management.events.function.setup;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FunctionSetupRepository extends JpaRepository<FunctionSetup, Long> {
+
+    Optional<FunctionSetup> findByFunctionSetupId(Long functionSetupId);
+
+    Optional<FunctionSetup> findByTitle(String title);
+
+}

@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.events.function;
+package com.bertmorris.event_management.events.function.type;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,24 +13,24 @@ public class FunctionType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
 
     public FunctionType() {}
 
-    public FunctionType(String name) {
-        this.name = name;
+    public FunctionType(String title) {
+        this.title = title;
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return this.title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }
