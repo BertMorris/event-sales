@@ -18,6 +18,8 @@ public class User {
 
     private String providerId;
 
+    private String syncKey;
+
     private Contact contact;
 
     public User() {}
@@ -33,6 +35,14 @@ public class User {
 
     public String getProviderId() {
         return this.providerId;
+    }
+
+    public String getSyncKey() {
+        return this.syncKey;
+    }
+
+    public void setSyncKey(String syncKey) {
+        this.syncKey = syncKey;
     }
 
     public Contact getContact() {
