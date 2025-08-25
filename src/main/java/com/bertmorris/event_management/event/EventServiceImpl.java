@@ -10,25 +10,25 @@ import com.bertmorris.event_management.event.dto.EventUpdateDto;
 import com.bertmorris.event_management.event.type.EventType;
 import com.bertmorris.event_management.event.type.EventTypeRepository;
 import com.bertmorris.event_management.user.UserService;
+import com.bertmorris.event_management.venue.VenueService;
 
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class EventServiceImpl implements EventService {
 
-    
-
     private final EventRepository eventRepository;
     private final EventTypeRepository eventTypeRepository;
     private final UserService userService;
     private final ContactService contactService;
+    private final VenueService venueService;
 
-
-    public EventServiceImpl(EventRepository eventRepository, EventTypeRepository eventTypeRepository, UserService userService, ContactService contactService) {
+    public EventServiceImpl(EventRepository eventRepository, EventTypeRepository eventTypeRepository, UserService userService, ContactService contactService, VenueService venueService) {
         this.eventRepository = eventRepository;
         this.eventTypeRepository = eventTypeRepository;
         this.userService = userService;
         this.contactService = contactService;
+        this.venueService = venueService;
     }
 
     @Override
