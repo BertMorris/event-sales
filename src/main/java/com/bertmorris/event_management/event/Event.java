@@ -8,9 +8,13 @@ import com.bertmorris.event_management.user.User;
 import com.bertmorris.event_management.venue.Venue;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,20 +25,34 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private User owner;
-    private Lead lead;
+    @Enumerated(value = EnumType.STRING)
     private EventStatus status;
-    private EventType type;
-    private Contact contact;
     private String company;
     private Date startDate;
     private Date endDate;
-    private Venue venue;
     private Integer guests;
     private Integer rooms;
 
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    @ManyToOne
+    @JoinColumn(name = "contact_id")
+    private Contact contact;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private EventType type;
+
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
+
+    // constructors
     public Event() {}
 
+    // getters and setters
     public Long getId() {
         return this.id;
     }

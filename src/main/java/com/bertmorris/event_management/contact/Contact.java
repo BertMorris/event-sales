@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "contact")
 public class Contact {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +22,7 @@ public class Contact {
 
     private String company;
 
+    // constructors
     public Contact() {}
 
     public Contact(String name, String emailAddress) {
@@ -34,6 +36,7 @@ public class Contact {
         this.company = company;
     }
 
+    // getters and setters
     public Long getId() {
         return this.id;
     }

@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "venue")
 public class Venue {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,13 +17,15 @@ public class Venue {
     private String name;
     private Integer capacity;
 
+    // constructors
     public Venue() {}
 
     public Venue(String name, Integer capacity) {
         this.name = name;
         this.capacity = capacity;
     }
-    
+
+    // getters and setters
     public Long getId() {
         return this.id;
     }

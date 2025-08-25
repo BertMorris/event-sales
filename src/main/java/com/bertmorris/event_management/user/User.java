@@ -1,7 +1,5 @@
 package com.bertmorris.event_management.user;
 
-import com.bertmorris.event_management.contact.Contact;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,15 +18,14 @@ public class User {
 
     private String syncKey;
 
-    private Contact contact;
-
+    // constructors
     public User() {}
 
-    public User(String providerId, Contact contact) {
+    public User(String providerId) {
         this.providerId = providerId;
-        this.contact = contact;
     }
 
+    // getters and setters
     public Long getId() {
         return this.id;
     }
@@ -43,14 +40,6 @@ public class User {
 
     public void setSyncKey(String syncKey) {
         this.syncKey = syncKey;
-    }
-
-    public Contact getContact() {
-        return this.contact;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
     }
 
 }

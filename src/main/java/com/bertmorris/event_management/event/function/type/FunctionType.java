@@ -9,18 +9,21 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "function_type")
 public class FunctionType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
+    // constructors
     public FunctionType() {}
 
     public FunctionType(String title) {
         this.title = title;
     }
 
+    // getters and setters
     public Long getId() {
         return this.id;
     }
