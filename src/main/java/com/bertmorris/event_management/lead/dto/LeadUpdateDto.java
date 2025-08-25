@@ -1,7 +1,5 @@
 package com.bertmorris.event_management.lead.dto;
 
-import java.time.LocalDate;
-
 import jakarta.validation.constraints.NotNull;
 
 public record LeadUpdateDto(
@@ -9,9 +7,6 @@ public record LeadUpdateDto(
     String title,
     String description,
     Integer budget,
-    LocalDate date,
-    Integer guests,
-    Integer rooms,
     @NotNull Long id,
     Long ownerId, // going with ids for now
     Long contactId

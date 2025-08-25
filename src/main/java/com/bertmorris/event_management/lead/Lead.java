@@ -1,7 +1,6 @@
 package com.bertmorris.event_management.lead;
 
 import java.time.Instant;
-import java.time.LocalDate;
 
 import com.bertmorris.event_management.contact.Contact;
 import com.bertmorris.event_management.user.User;
@@ -26,9 +25,6 @@ public class Lead {
     private String title;
     private String description;
     private Integer budget;
-    private LocalDate date;
-    private Integer guests;
-    private Integer rooms;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
@@ -83,30 +79,6 @@ public class Lead {
 
     public void setBudget(Integer budget) {
         this.budget = budget;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Integer getGuests() {
-        return guests;
-    }
-
-    public void setGuests(Integer guests) {
-        this.guests = guests;
-    }
-
-    public Integer getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(Integer rooms) {
-        this.rooms = rooms;
     }
 
     public User getOwner() {

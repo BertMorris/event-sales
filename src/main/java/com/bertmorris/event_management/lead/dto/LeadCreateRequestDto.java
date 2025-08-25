@@ -1,7 +1,5 @@
 package com.bertmorris.event_management.lead.dto;
 
-import java.time.LocalDate;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,9 +11,6 @@ public record LeadCreateRequestDto(
     @NotBlank String title,
     String description,
     Integer budget,
-    LocalDate date,
-    Integer guests,
-    Integer rooms,
     @NotNull String contactId
 ) {
 }
