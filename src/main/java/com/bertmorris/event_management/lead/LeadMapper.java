@@ -11,6 +11,7 @@ import com.bertmorris.event_management.lead.dto.LeadCreateDto;
 import com.bertmorris.event_management.lead.dto.LeadCreateRequestDto;
 import com.bertmorris.event_management.lead.dto.LeadResponseDto;
 import com.bertmorris.event_management.lead.dto.LeadUpdateDto;
+import com.bertmorris.event_management.lead.dto.LeadUpdateRequestDto;
 
 @Mapper(componentModel = "spring")
 public interface LeadMapper {
@@ -32,10 +33,12 @@ public interface LeadMapper {
 
     @Mapping(source = "owner.id", target = "ownerId")
     @Mapping(source = "contact.id", target = "contactId")
-    LeadResponseDto entityToResponseDto(Lead lead);
+    LeadResponseDto toResponseDto(Lead lead);
 
-    List<LeadResponseDto> entitiesToResponseDtos(List<Lead> leads);
+    List<LeadResponseDto> toResponseDtos(List<Lead> leads);
 
-    LeadCreateDto createRequestDtoToCreateDto(Long userId, LeadCreateRequestDto request);
+    LeadCreateDto toCreateDto(Long userId, LeadCreateRequestDto request);
+
+    LeadUpdateDto toUpdateDto(Long id, LeadUpdateRequestDto request);
 
 }

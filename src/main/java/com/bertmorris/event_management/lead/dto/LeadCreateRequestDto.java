@@ -16,6 +16,6 @@ public record LeadCreateRequestDto(
     LocalDate date,
     Integer guests,
     Integer rooms,
-    @NotNull Long contactId
+    @NotNull String contactId
 ) {
 }
