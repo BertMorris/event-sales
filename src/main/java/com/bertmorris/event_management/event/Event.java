@@ -1,8 +1,11 @@
 package com.bertmorris.event_management.event;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.bertmorris.event_management.contact.Contact;
+import com.bertmorris.event_management.event.function.Function;
 import com.bertmorris.event_management.event.type.EventType;
 import com.bertmorris.event_management.user.User;
 import com.bertmorris.event_management.venue.Venue;
@@ -15,6 +18,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -48,6 +52,9 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "venue_id")
     private Venue venue;
+
+    @OneToMany(mappedBy = "event")
+    private List<Function> functions = new ArrayList<>();
 
     // constructors
     public Event() {}
@@ -134,6 +141,18 @@ public class Event {
 
     public void setRooms(Integer rooms) {
         this.rooms = rooms;
+    }
+
+    public List<Function> getFunctions() {
+        return this.functions;
+    }
+
+    public void setFunctions(List<Function> functions) {
+        this.functions = functions;
+    }
+
+    public void addFunction(Function function) {
+        this.functions.add(function);
     }
     
 }
