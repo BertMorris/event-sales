@@ -7,6 +7,7 @@ import java.util.List;
 import com.bertmorris.event_management.contact.Contact;
 import com.bertmorris.event_management.event.function.Function;
 import com.bertmorris.event_management.event.type.EventType;
+import com.bertmorris.event_management.lead.Lead;
 import com.bertmorris.event_management.user.User;
 import com.bertmorris.event_management.venue.Venue;
 
@@ -42,6 +43,10 @@ public class Event {
     private User owner;
 
     @ManyToOne
+    @JoinColumn(name = "lead_id")
+    private Lead lead;
+
+    @ManyToOne
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
@@ -67,6 +72,15 @@ public class Event {
     public User getOwner() {
         return this.owner;
     }
+
+    public Lead getLead() {
+        return this.lead;
+    }
+
+    public void setLead(Lead lead) {
+        this.lead = lead;
+    }
+
     public void setOwner(User owner) {
         this.owner = owner;
     }
