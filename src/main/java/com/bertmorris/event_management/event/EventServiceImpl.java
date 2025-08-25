@@ -50,7 +50,7 @@ public class EventServiceImpl implements EventService {
         Event event = new Event();
        
        event.setOwner(userService.getUserById(eventCreateDto.ownerId()));
-       event.setLead(leadService.getLeadById(eventCreateDto.leadId()));
+       event.setLead(leadService.getLead(eventCreateDto.leadId()));
        event.setStatus(eventCreateDto.status() != null ? eventCreateDto.status() : EventStatus.PROSPECT);
 
        if (eventCreateDto.eventTypeId() != null) {
@@ -97,7 +97,7 @@ public class EventServiceImpl implements EventService {
         }
 
         if (eventUpdateDto.leadId() != null) {
-            event.setLead(leadService.getLeadById(eventUpdateDto.leadId()));
+            event.setLead(leadService.getLead(eventUpdateDto.leadId()));
         }
 
         if (eventUpdateDto.status() != null) {

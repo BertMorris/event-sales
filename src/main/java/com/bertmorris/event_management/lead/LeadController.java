@@ -2,12 +2,16 @@ package com.bertmorris.event_management.lead;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bertmorris.event_management.lead.dto.LeadCreateDto;
+import com.bertmorris.event_management.lead.dto.LeadCreateRequestDto;
+import com.bertmorris.event_management.lead.dto.LeadResponseDto;
+import com.bertmorris.event_management.user.User;
 
 import jakarta.validation.Valid;
 
@@ -36,8 +40,8 @@ public class LeadController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LeadResponseDto> getLeadById(@PathVariable Long id) {
-        Lead lead = leadService.getLeadById(id);
+    public ResponseEntity<LeadResponseDto> getLead(@PathVariable Long id) {
+        Lead lead = leadService.getLead(id);
         LeadResponseDto leadResponseDto = leadMapper.entityToResponseDto(lead);
 
         return ResponseEntity.ok(leadResponseDto);
@@ -45,7 +49,9 @@ public class LeadController {
 
     @PostMapping
     public ResponseEntity<LeadResponseDto> createLead(@RequestBody @Valid LeadCreateRequestDto request) {
-        LeadCreateDto leadCreateDto = leadMapper.createRequestDtoToCreateDto(request);
+        User user = new User(); // TODO: get user from jwt
+
+        LeadCreateDto leadCreateDto = leadMapper.createRequestDtoToCreateDto(user.getId(), request);
         Lead newLead = leadService.createLead(leadCreateDto);
         LeadResponseDto leadResponseDto = leadMapper.entityToResponseDto(newLead);
         
