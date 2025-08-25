@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.contacts;
+package com.bertmorris.event_management.contact;
 
 import java.util.Optional;
 

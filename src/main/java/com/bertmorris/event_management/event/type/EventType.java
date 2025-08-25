@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.events.event.type;
+package com.bertmorris.event_management.event.type;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

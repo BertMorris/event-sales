@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.users;
+package com.bertmorris.event_management.user;
 
 import java.util.Optional;
 

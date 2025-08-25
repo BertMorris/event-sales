@@ -1,11 +1,11 @@
-package com.bertmorris.event_management.events.event;
+package com.bertmorris.event_management.event;
 
 import java.util.Date;
 
-import com.bertmorris.event_management.contacts.Contact;
-import com.bertmorris.event_management.events.event.type.EventType;
-import com.bertmorris.event_management.events.venue.Venue;
-import com.bertmorris.event_management.users.User;
+import com.bertmorris.event_management.contact.Contact;
+import com.bertmorris.event_management.event.type.EventType;
+import com.bertmorris.event_management.user.User;
+import com.bertmorris.event_management.venue.Venue;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +20,9 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private User owner;
+    private Lead lead;
     private EventStatus status;
     private EventType type;
     private Contact contact;

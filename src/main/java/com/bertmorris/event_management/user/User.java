@@ -1,6 +1,6 @@
-package com.bertmorris.event_management.users;
+package com.bertmorris.event_management.user;
 
-import com.bertmorris.event_management.contacts.Contact;
+import com.bertmorris.event_management.contact.Contact;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

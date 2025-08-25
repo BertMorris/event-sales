@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.events.event.type;
+package com.bertmorris.event_management.event.type;
 
 import java.util.Optional;
 

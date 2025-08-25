@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.events.venue;
+package com.bertmorris.event_management.venue;
 
 import java.util.Optional;
 

@@ -1,10 +1,10 @@
-package com.bertmorris.event_management.events.function;
+package com.bertmorris.event_management.event.function;
 
 import java.time.LocalDateTime;
 
-import com.bertmorris.event_management.events.function.setup.FunctionSetup;
-import com.bertmorris.event_management.events.function.type.FunctionType;
-import com.bertmorris.event_management.events.venue.Venue;
+import com.bertmorris.event_management.event.function.setup.FunctionSetup;
+import com.bertmorris.event_management.event.function.type.FunctionType;
+import com.bertmorris.event_management.venue.Venue;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

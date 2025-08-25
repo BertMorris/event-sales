@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.events.function.setup;
+package com.bertmorris.event_management.event.function.setup;
 
 import java.util.Optional;
 
