@@ -1,0 +1,8 @@
+CREATE TABLE contact (
+    id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(50) NOT NULL,
+    email_address VARCHAR(255) NOT NULL UNIQUE,
+    company VARCHAR(150),
+    created_at TIMESTAMPTZ DEFAULT now() NOT NULL,
+    updated_at TIMESTAMPTZ DEFAULT now() NOT NULL
+);

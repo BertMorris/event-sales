@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.event.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.bertmorris.event_management.event.EventStatus;
 
@@ -14,11 +14,10 @@ public record EventUpdateDto(
     Long eventTypeId,
     Long contactId,
     String company,
-    Date startDate,
-    Date endDate,
+    LocalDate startDate,
+    LocalDate endDate,
     Long venueId,
     Integer guests,
     Integer rooms
 ) {
 }
-

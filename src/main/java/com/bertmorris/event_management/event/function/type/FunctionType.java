@@ -1,5 +1,11 @@
 package com.bertmorris.event_management.event.function.type;
 
+import java.time.Instant;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +21,11 @@ public class FunctionType {
     private Long id;
 
     private String title;
+
+    @CreationTimestamp(source = SourceType.DB)
+    private Instant createdAt;
+    @UpdateTimestamp(source = SourceType.DB)
+    private Instant updatedAt;
 
     // constructors
     public FunctionType() {}
@@ -34,6 +45,14 @@ public class FunctionType {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Instant getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return this.updatedAt;
     }
 
 }

@@ -1,5 +1,11 @@
 package com.bertmorris.event_management.contact;
 
+import java.time.Instant;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,11 +22,14 @@ public class Contact {
     private Long id;
 
     private String name;
-
     @Column(unique = true)
     private String emailAddress;
-
     private String company;
+
+    @CreationTimestamp(source = SourceType.DB)
+    private Instant createdAt;
+    @UpdateTimestamp(source = SourceType.DB)
+    private Instant updatedAt;
 
     // constructors
     public Contact() {}
@@ -63,6 +72,14 @@ public class Contact {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public Instant getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return this.updatedAt;
     }
 
 }

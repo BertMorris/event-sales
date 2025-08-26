@@ -1,8 +1,13 @@
 package com.bertmorris.event_management.event;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.bertmorris.event_management.contact.Contact;
 import com.bertmorris.event_management.event.function.Function;
@@ -32,9 +37,10 @@ public class Event {
 
     @Enumerated(value = EnumType.STRING)
     private EventStatus status;
+    private String title;
     private String company;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private Integer guests;
     private Integer rooms;
 
@@ -60,6 +66,11 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private List<Function> functions = new ArrayList<>();
+
+    @CreationTimestamp(source = SourceType.DB)
+    private Instant createdAt;
+    @UpdateTimestamp(source = SourceType.DB)
+    private Instant updatedAt;
 
     // constructors
     public Event() {}
@@ -93,6 +104,14 @@ public class Event {
         this.status = status;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public EventType getType() {
         return this.type;
     }
@@ -117,19 +136,19 @@ public class Event {
         this.company = company;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return this.startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return this.endDate;
     }   
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -167,6 +186,14 @@ public class Event {
 
     public void addFunction(Function function) {
         this.functions.add(function);
+    }
+
+    public Instant getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return this.updatedAt;
     }
     
 }

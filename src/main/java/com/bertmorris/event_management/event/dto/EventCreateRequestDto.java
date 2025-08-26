@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.event.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.bertmorris.event_management.event.EventStatus;
 import com.bertmorris.event_management.event.type.EventType;
@@ -14,8 +14,8 @@ public record EventCreateRequestDto(
     EventType type,
     Long contactId,
     String company,
-    Date startDate,
-    Date endDate,
+    LocalDate startDate,
+    LocalDate endDate,
     Long venueId,
     Integer guests,
     Integer rooms

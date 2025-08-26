@@ -6,8 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 
-    Optional<Contact> findByContactId(Long contactId);
-
     Optional<Contact> findByEmailAddress(String emailAddress);
 
 }

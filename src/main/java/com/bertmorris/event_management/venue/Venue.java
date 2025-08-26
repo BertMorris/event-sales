@@ -1,5 +1,11 @@
 package com.bertmorris.event_management.venue;
 
+import java.time.Instant;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +22,11 @@ public class Venue {
 
     private String name;
     private Integer capacity;
+
+    @CreationTimestamp(source = SourceType.DB)
+    private Instant createdAt;
+    @UpdateTimestamp(source = SourceType.DB)
+    private Instant updatedAt;
 
     // constructors
     public Venue() {}
@@ -44,6 +55,14 @@ public class Venue {
 
     public void setCapacity(Integer capacity) {
         this.capacity = capacity;
+    }
+
+    public Instant getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return this.updatedAt;
     }
     
 }

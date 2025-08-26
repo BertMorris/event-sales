@@ -42,8 +42,8 @@ public class LeadServiceImpl implements LeadService {
     public Lead updateLead(LeadUpdateDto leadUpdateDto) {
         Long id = leadUpdateDto.id();
         Lead lead = getLead(id);
-        Lead updatedLead = leadMapper.updateLeadFromDto(leadUpdateDto, lead);
+        leadMapper.updateLeadFromDto(leadUpdateDto, lead);
 
-        return leadRepository.save(updatedLead);
+        return leadRepository.save(lead);
     }
 }

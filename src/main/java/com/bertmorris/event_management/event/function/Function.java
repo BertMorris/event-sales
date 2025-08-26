@@ -1,7 +1,13 @@
 package com.bertmorris.event_management.event.function;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.OffsetDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import com.bertmorris.event_management.event.Event;
 import com.bertmorris.event_management.event.function.setup.FunctionSetup;
 import com.bertmorris.event_management.event.function.type.FunctionType;
 import com.bertmorris.event_management.user.User;
@@ -23,9 +29,17 @@ public class Function {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private OffsetDateTime startTime;
+    private OffsetDateTime endTime;
     private Integer guests;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
@@ -39,9 +53,10 @@ public class Function {
     @JoinColumn(name = "setup_id")
     private FunctionSetup setup;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;
+    @CreationTimestamp(source = SourceType.DB)
+    private Instant createdAt;
+    @UpdateTimestamp(source = SourceType.DB)
+    private Instant updatedAt;
 
     // constructors
     public Function() {}
@@ -51,16 +66,20 @@ public class Function {
         return id;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    public OffsetDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
+    public void setStartTime(OffsetDateTime startTime) {
+        this.startTime = startTime;
     }
     
-    public LocalDateTime getEndDate() {
-        return endDate;
+    public OffsetDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(OffsetDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getGuests() {
@@ -71,8 +90,20 @@ public class Function {
         this.guests = guests;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     public FunctionType getType() {
@@ -99,12 +130,12 @@ public class Function {
         this.setup = setup;
     }
 
-    public User getOwner() {
-        return owner;
+    public Instant getCreatedAt() {
+        return this.createdAt;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public Instant getUpdatedAt() {
+        return this.updatedAt;
     }
 
 }

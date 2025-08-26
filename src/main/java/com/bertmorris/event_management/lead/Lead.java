@@ -2,10 +2,16 @@ package com.bertmorris.event_management.lead;
 
 import java.time.Instant;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.bertmorris.event_management.contact.Contact;
 import com.bertmorris.event_management.user.User;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,6 +27,8 @@ public class Lead {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Enumerated(value = EnumType.STRING)
+    private LeadStatus status;
     private String company;
     private String title;
     private String description;
@@ -34,7 +42,9 @@ public class Lead {
     @JoinColumn(name = "contact_id")
     private Contact contact;
 
+    @CreationTimestamp(source = SourceType.DB)
     private Instant createdAt;
+    @UpdateTimestamp(source = SourceType.DB)
     private Instant updatedAt;
 
     // constructors
@@ -45,8 +55,12 @@ public class Lead {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public LeadStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(LeadStatus status) {
+        this.status = status;
     }
 
     public String getCompany() {

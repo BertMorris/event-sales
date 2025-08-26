@@ -1,13 +1,11 @@
 package com.bertmorris.event_management.event.function;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FunctionRepository extends JpaRepository<Function, Long> {
 
-    Optional<Function> findByFunctionId(Long functionId);
-
-    Optional<Function> findByTitle(String title);
+    List<Function> findByEventId(Long eventId);
 
 }
