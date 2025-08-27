@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.InjectionStrategy;
 
 import com.bertmorris.event_management.contact.ContactMapper;
 import com.bertmorris.event_management.lead.dto.LeadCreateDto;
@@ -16,7 +17,8 @@ import com.bertmorris.event_management.lead.dto.LeadUpdateDto;
 import com.bertmorris.event_management.lead.dto.LeadUpdateRequestDto;
 import com.bertmorris.event_management.user.UserMapper;
 
-@Mapper(componentModel = "spring", uses = { UserMapper.class, ContactMapper.class })
+
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = { UserMapper.class, ContactMapper.class })
 public interface LeadMapper {
 
     @Mapping(target = "owner", source = "ownerId")

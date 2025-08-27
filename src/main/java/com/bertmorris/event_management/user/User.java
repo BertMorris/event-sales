@@ -40,6 +40,14 @@ public class User {
         return this.id;
     }
 
+    public void setId(Long id) {
+        if (this.id != null && !this.id.equals(id)) {
+            throw new IllegalStateException("Id cannot be changed");
+        }
+        
+        this.id = id;
+    }
+
     public String getProviderId() {
         return this.providerId;
     }
