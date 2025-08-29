@@ -68,4 +68,34 @@ public class User {
         return this.updatedAt;
     }
 
+    // builder
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String providerId;
+        private String syncKey;
+        private Instant createdAt;
+        private Instant updatedAt;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder providerId(String providerId) { this.providerId = providerId; return this; }
+        public Builder syncKey(String syncKey) { this.syncKey = syncKey; return this; }
+        public Builder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
+        public Builder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
+
+        public User build() {
+            User user = new User();
+
+            user.id = id;
+            user.providerId = providerId;
+            user.syncKey = syncKey;
+            user.createdAt = createdAt;
+            user.updatedAt = updatedAt;
+
+            return user;
+        }
+    }
 }

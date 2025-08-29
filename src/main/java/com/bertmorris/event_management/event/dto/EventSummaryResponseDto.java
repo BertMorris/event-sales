@@ -4,19 +4,17 @@ import java.time.LocalDate;
 
 import com.bertmorris.event_management.event.EventStatus;
 
-import jakarta.validation.constraints.NotNull;
-
-
-public record EventCreateDto(
-    @NotNull Long ownerId,
-    @NotNull Long leadId,
+public record EventSummaryResponseDto(
+    String id,
+    String leadId,
     EventStatus status,
-    Long typeId,
-    Long contactId,
+    String typeId,
+    String title,
     String company,
+    String contactId,
     LocalDate startDate,
     LocalDate endDate,
-    Long venueId,
+    String venueId,
     Integer guests,
     Integer rooms
 ) {

@@ -195,5 +195,144 @@ public class Event {
     public Instant getUpdatedAt() {
         return this.updatedAt;
     }
-    
+
+    // builder
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private EventStatus status;
+        private String title;
+        private String company;
+        private LocalDate startDate;
+        private LocalDate endDate;
+        private Integer guests;
+        private Integer rooms;
+        private User owner;
+        private Lead lead;
+        private Contact contact;
+        private EventType type;
+        private Venue venue;
+        private List<Function> functions;
+        private Instant createdAt;
+        private Instant updatedAt;
+
+
+        public Builder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder status(EventStatus status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder title(String title) {
+            this.title = title;
+            return this;
+        }
+        
+        public Builder company(String company) {
+            this.company = company;
+            return this;
+        }
+        
+        
+        public Builder startDate(LocalDate startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+        
+        
+        public Builder endDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+        
+        
+        public Builder guests(Integer guests) {
+            this.guests = guests;
+            return this;
+        }
+        
+        
+        public Builder rooms(Integer rooms) {
+            this.rooms = rooms;
+            return this;
+        }
+        
+        public Builder owner(User owner) {
+            this.owner = owner;
+            return this;
+        }
+        
+        
+        public Builder lead(Lead lead) {
+            this.lead = lead;
+            return this;
+        }
+        
+        
+        public Builder contact(Contact contact) {
+            this.contact = contact;
+            return this;
+        }
+        
+        
+        public Builder type(EventType type) {
+            this.type = type;
+            return this;
+        }
+        
+        
+        public Builder venue(Venue venue) {
+            this.venue = venue;
+            return this;
+        }
+        
+        
+        public Builder functions(List<Function> functions) {
+            this.functions = functions;
+            return this;
+        }
+        
+        
+        public Builder createdAt(Instant createdAt) {
+            this.createdAt = createdAt;
+            return this;
+        }
+        
+        
+        public Builder updatedAt(Instant updatedAt) {
+            this.updatedAt = updatedAt;
+            return this;
+        }
+        
+        
+        public Event build() {
+            Event event = new Event();
+
+            event.id = id;
+            event.status = status;
+            event.title = title;
+            event.company = company;
+            event.startDate = startDate;
+            event.endDate = endDate;
+            event.guests = guests;
+            event.rooms = rooms;
+            event.owner = owner;
+            event.lead = lead;
+            event.contact = contact;
+            event.type = type;
+            event.venue = venue;
+            event.functions = functions;
+            event.createdAt = createdAt;
+            event.updatedAt = updatedAt;
+
+            return event;
+        }
+    }
 }

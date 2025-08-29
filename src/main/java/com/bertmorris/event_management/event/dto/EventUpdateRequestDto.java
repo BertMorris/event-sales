@@ -4,13 +4,10 @@ import java.time.LocalDate;
 
 import com.bertmorris.event_management.event.EventStatus;
 
-import jakarta.validation.constraints.NotBlank;
-
-
-public record EventCreateRequestDto(
-    @NotBlank String ownerId,
-    @NotBlank String leadId,
-    EventStatus status, // EventStatus is an enum
+public record EventUpdateRequestDto(
+    String ownerId,
+    String leadId,
+    EventStatus status,
     String typeId,
     String contactId,
     String company,
@@ -46,54 +43,56 @@ public record EventCreateRequestDto(
             this.leadId = leadId;
             return this;
         }
-
+        
         public Builder status(EventStatus status) {
             this.status = status;
             return this;
         }
-
+        
         public Builder typeId(String typeId) {
             this.typeId = typeId;
             return this;
         }
-
+        
+        
         public Builder contactId(String contactId) {
             this.contactId = contactId;
             return this;
         }
-
+        
+        
         public Builder company(String company) {
             this.company = company;
             return this;
         }
-
+        
         public Builder startDate(LocalDate startDate) {
             this.startDate = startDate;
             return this;
         }
-
+        
         public Builder endDate(LocalDate endDate) {
             this.endDate = endDate;
             return this;
         }
-
+        
         public Builder venueId(String venueId) {
             this.venueId = venueId;
             return this;
         }
-
+        
         public Builder guests(Integer guests) {
             this.guests = guests;
             return this;
         }
-
+        
         public Builder rooms(Integer rooms) {
             this.rooms = rooms;
             return this;
         }
-
-        public EventCreateRequestDto build() {
-            return new EventCreateRequestDto(ownerId, leadId, status, typeId, contactId, company, startDate, endDate, venueId, guests, rooms);
+        
+        public EventUpdateRequestDto build() {
+            return new EventUpdateRequestDto(ownerId, leadId, status, typeId, contactId, company, startDate, endDate, venueId, guests, rooms);
         }
     }
 }

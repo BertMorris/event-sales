@@ -90,4 +90,30 @@ public class Contact {
         return this.updatedAt;
     }
 
+    // builder
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String name;
+        private String emailAddress;
+        private String company;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder name(String name) { this.name = name; return this; }
+        public Builder emailAddress(String emailAddress) { this.emailAddress = emailAddress; return this; }
+        public Builder company(String company) { this.company = company; return this; }
+
+        public Contact build() {
+            Contact contact = new Contact();
+            contact.id = id;
+            contact.name = name;
+            contact.emailAddress = emailAddress;
+            contact.company = company;
+            return contact;
+        }
+    }
+
 }

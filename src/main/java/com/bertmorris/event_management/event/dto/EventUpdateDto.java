@@ -11,7 +11,7 @@ public record EventUpdateDto(
     Long ownerId,
     Long leadId,
     EventStatus status,
-    Long eventTypeId,
+    Long typeId,
     Long contactId,
     String company,
     LocalDate startDate,

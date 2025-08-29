@@ -48,4 +48,31 @@ public class EventType {
         return this.updatedAt;
     }
 
+    // builder
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private Long id;
+        private String name;
+        private Instant createdAt;
+        private Instant updatedAt;
+
+        public Builder id(Long id) { this.id = id; return this; }
+        public Builder name(String name) { this.name = name; return this; }
+        public Builder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
+        public Builder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
+
+        public EventType build() {
+            EventType eventType = new EventType();
+
+            eventType.id = id;
+            eventType.name = name;
+            eventType.createdAt = createdAt;
+            eventType.updatedAt = updatedAt;
+
+            return eventType;
+        }
+    }
 }

@@ -18,7 +18,7 @@ import com.bertmorris.event_management.lead.dto.LeadUpdateRequestDto;
 import com.bertmorris.event_management.user.UserMapper;
 
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = { UserMapper.class, ContactMapper.class })
+@Mapper(componentModel = "spring", uses = { UserMapper.class, ContactMapper.class })
 public interface LeadMapper {
 
     @Mapping(target = "owner", source = "ownerId")
@@ -46,5 +46,7 @@ public interface LeadMapper {
     LeadCreateDto toCreateDto(Long ownerId, LeadCreateRequestDto request);
 
     LeadUpdateDto toUpdateDto(Long id, LeadUpdateRequestDto request);
+
+    Lead toRef(Long id);
 
 }
