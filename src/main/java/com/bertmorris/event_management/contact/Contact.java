@@ -108,10 +108,12 @@ public class Contact {
 
         public Contact build() {
             Contact contact = new Contact();
+            
             contact.id = id;
             contact.name = name;
             contact.emailAddress = emailAddress;
             contact.company = company;
+
             return contact;
         }
     }

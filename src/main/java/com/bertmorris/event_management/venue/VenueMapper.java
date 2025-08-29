@@ -9,6 +9,4 @@ public interface VenueMapper {
 
     VenueResponseDto toResponseDto(Venue venue);
 
-    Venue toRef(Long id);
-
 }

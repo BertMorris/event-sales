@@ -1,4 +1,4 @@
-package com.bertmorris.event_management.event.dto;
+package com.bertmorris.event_management.contact.dto;
 
 public class ContactResponseDto {
 
