@@ -7,7 +7,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.mapstruct.InjectionStrategy;
 
 import com.bertmorris.event_management.contact.ContactMapper;
 import com.bertmorris.event_management.lead.dto.LeadCreateDto;
@@ -21,22 +20,6 @@ import com.bertmorris.event_management.user.UserMapper;
 @Mapper(componentModel = "spring", uses = { UserMapper.class, ContactMapper.class })
 public interface LeadMapper {
 
-    @Mapping(target = "owner", source = "ownerId")
-    @Mapping(target = "contact", source = "contactId")
-    @Mapping(target = "status", source = "status")
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    Lead toEntity(LeadCreateDto dto);
-   
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "owner", source = "dto.ownerId")
-    @Mapping(target = "contact", source = "dto.contactId")
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    void updateLeadFromDto(LeadUpdateDto dto, @MappingTarget Lead lead);
-
     @Mapping(source = "owner.id", target = "ownerId")
     @Mapping(source = "contact.id", target = "contactId")
     LeadResponseDto toResponseDto(Lead lead);
@@ -46,7 +29,5 @@ public interface LeadMapper {
     LeadCreateDto toCreateDto(Long ownerId, LeadCreateRequestDto request);
 
     LeadUpdateDto toUpdateDto(Long id, LeadUpdateRequestDto request);
-
-    Lead toRef(Long id);
 
 }

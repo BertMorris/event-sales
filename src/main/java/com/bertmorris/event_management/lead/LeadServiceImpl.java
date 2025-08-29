@@ -33,7 +33,8 @@ public class LeadServiceImpl implements LeadService {
     
     @Override
     public Lead createLead(LeadCreateDto leadCreateDto) {
-        Lead lead = leadMapper.toEntity(leadCreateDto);
+        // TODO: implement without mapper
+        Lead lead = new Lead();
 
         return leadRepository.save(lead);
     }
@@ -42,7 +43,8 @@ public class LeadServiceImpl implements LeadService {
     public Lead updateLead(LeadUpdateDto leadUpdateDto) {
         Long id = leadUpdateDto.id();
         Lead lead = getLead(id);
-        leadMapper.updateLeadFromDto(leadUpdateDto, lead);
+
+        // TODO: implement without mapper
 
         return leadRepository.save(lead);
     }
