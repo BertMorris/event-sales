@@ -1,11 +1,17 @@
 package com.bertmorris.event_management.contact;
 
+import com.bertmorris.event_management.contact.dto.ContactCreateDto;
+import com.bertmorris.event_management.contact.dto.ContactUpdateDto;
 
 public interface ContactService {
 
-    Contact getContactById(Long id);
+    Contact getById(Long id);
 
-    Contact getContactByEmailAddress(String emailAddress);
+    Contact getByEmailAddress(String emailAddress);
+
+    Contact create(ContactCreateDto contactCreateDto);
+
+    Contact update(ContactUpdateDto contactUpdateDto);
 
     Contact getOrCreateContact(String name, String emailAddress);
 
