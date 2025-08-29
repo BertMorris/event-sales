@@ -3,11 +3,12 @@ package com.bertmorris.event_management.contact;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import jakarta.validation.constraints.NotNull;
+import com.bertmorris.event_management.contact.dto.ContactResponseDto;
+
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ContactMapper {
 
-    Contact toRef(@NotNull Long id);
+    ContactResponseDto toResponseDto(Contact contact);
 
 }

@@ -1,29 +1,33 @@
 package com.bertmorris.event_management.contact;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
+
+import com.bertmorris.event_management.contact.dto.ContactResponseDto;
 
 @DisplayName("ContactMapper Tests")
 class ContactMapperTest {
 
     private final ContactMapper contactMapper = Mappers.getMapper(ContactMapper.class);
 
-    @ParameterizedTest
-    @ValueSource(longs = { Long.MIN_VALUE, -1, 0, 1, Long.MAX_VALUE })
-    @DisplayName("toRef should return Contact reference with correct ID")
-    void toRef_shouldReturnContactRef(Long id) {
-        Contact result = contactMapper.toRef(id);
-        
-        assertThat(result).isNotNull();
-        assertThat(result.getId()).isEqualTo(id);
-        assertThat(result.getName()).isNull();
-        assertThat(result.getEmailAddress()).isNull();
-        assertThat(result.getCompany()).isNull();
-        assertThat(result.getCreatedAt()).isNull();
-        assertThat(result.getUpdatedAt()).isNull();
+    @Test
+    void toResponseDto_shouldCreateContactResponseDtoSuccessfully() {
+        Contact contact = new Contact();
+        contact.setId(1L);
+        contact.setName("name");
+        contact.setEmailAddress("test@email.com");
+        contact.setCompany("company");
+
+        ContactResponseDto responseDto = contactMapper.toResponseDto(contact);
+
+        assertNotNull(responseDto);
+        assertEquals(contact.getId().toString(), responseDto.id());
+        assertEquals(contact.getName(), responseDto.name());
+        assertEquals(contact.getEmailAddress(), responseDto.emailAddress());
+        assertEquals(contact.getCompany(), responseDto.company());
     }
-    
 }
