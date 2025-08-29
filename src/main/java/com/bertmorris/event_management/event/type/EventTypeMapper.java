@@ -9,6 +9,4 @@ public interface EventTypeMapper {
 
     EventTypeResponseDto toResponseDto(EventType eventType);
 
-    EventType toRef(Long id);
-
 }

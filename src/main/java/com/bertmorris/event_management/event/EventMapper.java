@@ -38,25 +38,4 @@ public interface EventMapper {
     @Mapping(target = "venueId", source = "venue.id")
     EventDetailResponseDto toDetailResponseDto(Event event);
    
-    @Mapping(target = "owner", source = "ownerId")
-    @Mapping(target = "lead", source = "leadId")
-    @Mapping(target = "type", source = "typeId")
-    @Mapping(target = "contact", source = "contactId")
-    @Mapping(target = "venue", source = "venueId")
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    Event createEntity(EventCreateDto dto);
-
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "owner", source = "ownerId")
-    @Mapping(target = "lead", source = "leadId")
-    @Mapping(target = "type", source = "typeId")
-    @Mapping(target = "contact", source = "contactId")
-    @Mapping(target = "venue", source = "venueId")
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    Event updateEntity(EventUpdateDto dto, @MappingTarget Event event);
-
 }

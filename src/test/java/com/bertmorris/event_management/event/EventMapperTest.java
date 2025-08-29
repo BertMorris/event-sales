@@ -148,43 +148,4 @@ public class EventMapperTest {
         assertEquals(event.getRooms(), eventDetailResponseDto.rooms());
     }
 
-    @Test
-    void createEntity_shouldCreateEventSuccessfully() {
-        EventCreateDto eventCreateDto = EventCreateDtoTestBuilder.anEventCreateDto().build();
-
-        Event event = eventMapper.createEntity(eventCreateDto);
-
-        assertNotNull(event);
-        assertEquals(eventCreateDto.ownerId(), event.getOwner().getId());
-        assertEquals(eventCreateDto.leadId(), event.getLead().getId());
-        assertEquals(eventCreateDto.typeId(), event.getType().getId());
-        assertEquals(eventCreateDto.contactId(), event.getContact().getId());
-        assertEquals(eventCreateDto.company(), event.getCompany());
-        assertEquals(eventCreateDto.startDate(), event.getStartDate());
-        assertEquals(eventCreateDto.endDate(), event.getEndDate());
-        assertEquals(eventCreateDto.venueId(), event.getVenue().getId());
-        assertEquals(eventCreateDto.guests(), event.getGuests());
-        assertEquals(eventCreateDto.rooms(), event.getRooms());
-    }
-
-    @Test
-    void updateEntity_shouldUpdateEventSuccessfully() {
-        Event event = EventTestBuilder.anEvent().build();
-
-        EventUpdateDto eventUpdateDto = EventUpdateDtoTestBuilder.anEventUpdateDto().build();
-
-        Event updatedEvent = eventMapper.updateEntity(eventUpdateDto, event);
-
-        assertNotNull(updatedEvent);
-        assertEquals(eventUpdateDto.ownerId(), updatedEvent.getOwner().getId());
-        assertEquals(eventUpdateDto.leadId(), updatedEvent.getLead().getId());
-        assertEquals(eventUpdateDto.typeId(), updatedEvent.getType().getId());
-        assertEquals(eventUpdateDto.contactId(), updatedEvent.getContact().getId());
-        assertEquals(eventUpdateDto.company(), updatedEvent.getCompany());
-        assertEquals(eventUpdateDto.startDate(), updatedEvent.getStartDate());
-        assertEquals(eventUpdateDto.endDate(), updatedEvent.getEndDate());
-        assertEquals(eventUpdateDto.venueId(), updatedEvent.getVenue().getId());
-        assertEquals(eventUpdateDto.guests(), updatedEvent.getGuests());
-        assertEquals(eventUpdateDto.rooms(), updatedEvent.getRooms());
-    }
 }
