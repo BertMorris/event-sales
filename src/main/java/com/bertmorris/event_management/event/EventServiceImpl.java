@@ -58,7 +58,7 @@ public class EventServiceImpl implements EventService {
        }
 
        if (eventCreateDto.contactId() != null) {
-        event.setContact(contactService.getContactById(eventCreateDto.contactId()));
+        event.setContact(contactService.getById(eventCreateDto.contactId()));
        }
        
        if (eventCreateDto.company() != null) {
@@ -109,7 +109,7 @@ public class EventServiceImpl implements EventService {
         }
 
         if (eventUpdateDto.contactId() != null) {
-            event.setContact(contactService.getContactById(eventUpdateDto.contactId()));
+            event.setContact(contactService.getById(eventUpdateDto.contactId()));
         }
 
         if (eventUpdateDto.company() != null) {

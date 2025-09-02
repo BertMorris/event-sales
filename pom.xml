@@ -72,7 +72,19 @@
 			<version>1.6.3</version>
 		</dependency>
 
-	</dependencies>
+		<!-- Email -->
+		<dependency>
+			<groupId>com.microsoft.graph</groupId>
+			<artifactId>microsoft-graph</artifactId>
+			<version>6.51.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-identity</artifactId>
+			<version>1.17.0</version>
+		</dependency>
+
+ </dependencies>
 
 	<build>
 		<plugins>
