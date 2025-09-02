@@ -1,8 +1,4 @@
 spring:
-  config:
-    import:
-    
-
   application:
     name: event-management
   datasource:
@@ -32,4 +28,5 @@ microsoft:
   client-id: ${MICROSOFT_CLIENT_ID}
   client-secret: ${MICROSOFT_CLIENT_SECRET}
   tenant-id: ${MICROSOFT_TENANT_ID}
-  scopes: https://graph.microsoft.com/.default
+  scopes: 
+    - https://graph.microsoft.com/.default
