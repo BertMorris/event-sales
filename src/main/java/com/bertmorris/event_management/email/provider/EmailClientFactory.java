@@ -8,11 +8,11 @@ import com.microsoft.graph.serviceclient.GraphServiceClient;
 
 
 @Component
-public class EmailClient {
+public class EmailClientFactory {
    
     private final MsGraphConfig msGraphConfig;
 
-    public EmailClient(MsGraphConfig msGraphConfig) {
+    public EmailClientFactory(MsGraphConfig msGraphConfig) {
         this.msGraphConfig = msGraphConfig;
     }
 
