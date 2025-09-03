@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bertmorris.event_management.email.dto.EmailResponseDto;
 import com.bertmorris.event_management.user.UserService;
-import com.microsoft.graph.models.User;
-
 
 @RestController
 @RequestMapping("/emails")

@@ -1,6 +1,7 @@
 package com.bertmorris.event_management.email;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -47,7 +48,7 @@ public class Email {
     private Contact sender;
 
     @OneToMany(mappedBy = "email")
-    private List<EmailRecipient> recipients;
+    private List<EmailRecipient> recipients = new ArrayList<>();
     
     
     @CreationTimestamp(source = SourceType.DB)

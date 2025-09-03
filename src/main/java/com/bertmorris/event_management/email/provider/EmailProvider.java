@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.microsoft.graph.users.item.mailfolders.item.messages.delta.DeltaGetResponse;
+import com.bertmorris.event_management.email.EmailService;
+import com.bertmorris.event_management.email.dto.EmailCreateDto;
 import com.microsoft.graph.models.Message;
 import com.microsoft.graph.serviceclient.GraphServiceClient;
 
@@ -12,11 +14,13 @@ import com.microsoft.graph.serviceclient.GraphServiceClient;
 public class EmailProvider {
 
     private final EmailClientFactory emailClientFactory;
-    private final EmailMapper emailMapper;
-
-    public EmailProvider(EmailClientFactory emailClientFactory, EmailMapper emailMapper) {
+    private final EmailProviderMapper emailProviderMapper;
+    private final EmailService emailService;
+    
+    public EmailProvider(EmailClientFactory emailClientFactory, EmailProviderMapper emailProviderMapper, EmailService emailService) {
         this.emailClientFactory = emailClientFactory;
-        this.emailMapper = emailMapper;
+        this.emailProviderMapper = emailProviderMapper;
+        this.emailService = emailService;
     }
     
     public String syncEmails(String oboToken, String syncKey) {
@@ -39,7 +43,7 @@ public class EmailProvider {
         while (response.getValue() != null) {
             final List<Message> messages = response.getValue();
             for (Message message : messages) {
-                EmailCreateDto emailCreatDto = emailMapper.toCreateDto(message);
+                EmailCreateDto emailCreateDto = emailProviderMapper.toEmailCreateDto(message);
                 emailService.createEmail(emailCreateDto);
             }
        

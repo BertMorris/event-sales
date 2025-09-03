@@ -35,6 +35,11 @@ public class User {
         this.providerId = providerId;
     }
 
+    // methods
+    public void updateSyncKey(String syncKey) {
+        this.syncKey = syncKey;
+    }
+
     // getters and setters
     public Long getId() {
         return this.id;
