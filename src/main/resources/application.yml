@@ -1,6 +1,13 @@
 spring:
   application:
     name: event-management
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://login.microsoftonline.com/{MICROSOFT_TENANT_ID}/v2.0/
+          audiences: ${MICROSOFT_CLIENT_ID}
+
   datasource:
     url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
     username: ${POSTGRES_USER}

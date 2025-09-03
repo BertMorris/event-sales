@@ -39,9 +39,7 @@ build/
 .env
 
 ### Java ###
-# application properties
-application.yml
-application.properties
+
 
 # Compiled class file
 *.class
