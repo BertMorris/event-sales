@@ -3,16 +3,20 @@ package com.bertmorris.event_management.contact;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mapstruct.factory.Mappers;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.bertmorris.event_management.contact.dto.ContactResponseDto;
 
-@DisplayName("ContactMapper Tests")
+@ExtendWith(SpringExtension.class)
+@Import(ContactMapperImpl.class)
 class ContactMapperTest {
 
-    private final ContactMapper contactMapper = Mappers.getMapper(ContactMapper.class);
+    @Autowired
+    private ContactMapper contactMapper;
 
     @Test
     void toResponseDto_shouldCreateContactResponseDtoSuccessfully() {
