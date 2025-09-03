@@ -1,6 +1,5 @@
 package com.bertmorris.event_management.event.function;
 
-import java.time.Instant;
 import java.time.OffsetDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -54,9 +53,9 @@ public class Function {
     private FunctionSetup setup;
 
     @CreationTimestamp(source = SourceType.DB)
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
     // constructors
     public Function() {}
@@ -130,11 +129,11 @@ public class Function {
         this.setup = setup;
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 

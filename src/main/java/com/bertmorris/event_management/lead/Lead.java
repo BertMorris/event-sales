@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.lead;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
@@ -43,9 +43,9 @@ public class Lead {
     private Contact contact;
 
     @CreationTimestamp(source = SourceType.DB)
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
     // constructors
     public Lead() {}
@@ -111,11 +111,11 @@ public class Lead {
         this.contact = contact;
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return updatedAt;
     }
 
@@ -133,8 +133,8 @@ public class Lead {
         private Integer budget;
         private User owner;
         private Contact contact;
-        private Instant createdAt;
-        private Instant updatedAt;
+        private OffsetDateTime createdAt;
+        private OffsetDateTime updatedAt;
 
         public Builder id(Long id) { this.id = id; return this; }
         public Builder status(LeadStatus status) { this.status = status; return this; }
@@ -144,8 +144,8 @@ public class Lead {
         public Builder budget(Integer budget) { this.budget = budget; return this; }
         public Builder owner(User owner) { this.owner = owner; return this; }
         public Builder contact(Contact contact) { this.contact = contact; return this; }
-        public Builder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
-        public Builder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
+        public Builder createdAt(OffsetDateTime createdAt) { this.createdAt = createdAt; return this; }
+        public Builder updatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public Lead build() {
             Lead lead = new Lead();

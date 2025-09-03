@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.venue;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
@@ -24,9 +24,9 @@ public class Venue {
     private Integer capacity;
 
     @CreationTimestamp(source = SourceType.DB)
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
     // constructors
     public Venue() {}
@@ -57,11 +57,11 @@ public class Venue {
         this.capacity = capacity;
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
@@ -74,14 +74,14 @@ public class Venue {
         private Long id;
         private String name;
         private Integer capacity;
-        private Instant createdAt;
-        private Instant updatedAt;
+        private OffsetDateTime createdAt;
+        private OffsetDateTime updatedAt;
 
         public Builder id(Long id) { this.id = id; return this; }
         public Builder name(String name) { this.name = name; return this; }
         public Builder capacity(Integer capacity) { this.capacity = capacity; return this; }
-        public Builder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
-        public Builder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
+        public Builder createdAt(OffsetDateTime createdAt) { this.createdAt = createdAt; return this; }
+        public Builder updatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public Venue build() {
             Venue venue = new Venue();

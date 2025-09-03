@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import com.bertmorris.event_management.email.dto.EmailCreateDto;
 import com.bertmorris.event_management.email.recipient.EmailRecipientType;
@@ -15,11 +16,18 @@ import com.microsoft.graph.models.Recipient;
 @Mapper(componentModel = "spring")
 public interface EmailProviderMapper {
 
-    @Mapping(target = "recipients", expression = "java(toEmailRecipientCreateDtos(message))")
+    @Mapping(target = "providerId", source = "id")
+    @Mapping(target = "body", source = "body.content")
+    @Mapping(target = "receivedAt", source = "receivedDateTime")
+    @Mapping(target = "sentAt", source = "sentDateTime")
+    @Mapping(target = "senderName", source = "sender.emailAddress.name")
+    @Mapping(target = "senderEmail", source = "sender.emailAddress.address")
+    @Mapping(target = "recipients", source = "message", qualifiedByName = "toEmailRecipientCreateDtos")
     EmailCreateDto toEmailCreateDto(Message message);
 
     List<EmailCreateDto> toEmailCreateDtos(List<Message> messages);
 
+    @Named("toEmailRecipientCreateDtos")
     default List<EmailRecipientCreateDto> toEmailRecipientCreateDtos(Message message) {
         List<EmailRecipientCreateDto> emailRecipientCreateDtos = new ArrayList<>();
         

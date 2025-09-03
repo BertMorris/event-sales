@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.email.dto;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.bertmorris.event_management.email.recipient.dto.EmailRecipientResponseDto;
@@ -12,9 +12,9 @@ public record EmailResponseDto(
     String body,
     String conversationId,
     boolean hasAttachments,
-    Instant readAt,
-    Instant receivedAt,
-    Instant sentAt,
+    OffsetDateTime readAt,
+    OffsetDateTime receivedAt,
+    OffsetDateTime sentAt,
     String senderId,
     List<EmailRecipientResponseDto> recipients
 ) {

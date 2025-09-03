@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.event.type;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
@@ -22,9 +22,9 @@ public class EventType {
     private String name;
 
     @CreationTimestamp(source = SourceType.DB)
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
     public EventType() {}
 
@@ -40,11 +40,11 @@ public class EventType {
         return this.name;
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
@@ -56,13 +56,13 @@ public class EventType {
     public static class Builder {
         private Long id;
         private String name;
-        private Instant createdAt;
-        private Instant updatedAt;
+        private OffsetDateTime createdAt;
+        private OffsetDateTime updatedAt;
 
         public Builder id(Long id) { this.id = id; return this; }
         public Builder name(String name) { this.name = name; return this; }
-        public Builder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
-        public Builder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
+        public Builder createdAt(OffsetDateTime createdAt) { this.createdAt = createdAt; return this; }
+        public Builder updatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public EventType build() {
             EventType eventType = new EventType();

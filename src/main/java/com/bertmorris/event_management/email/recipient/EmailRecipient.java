@@ -1,5 +1,8 @@
 package com.bertmorris.event_management.email.recipient;
 
+import com.bertmorris.event_management.contact.Contact;
+import com.bertmorris.event_management.email.Email;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -21,36 +24,36 @@ public class EmailRecipient {
 
     @ManyToOne
     @JoinColumn(name = "email_id")
-    private Long emailId;
+    private Email email;
 
     @ManyToOne
     @JoinColumn(name = "contact_id")
-    private Long contactId;
+    private Contact contact;
 
     // constructors
     public EmailRecipient() {};
 
-    public EmailRecipient(Long emailId, Long contactId, EmailRecipientType type) {
-        this.emailId = emailId;
-        this.contactId = contactId;
+    public EmailRecipient(Email email, Contact contact, EmailRecipientType type) {
+        this.email = email;
+        this.contact = contact;
         this.type = type;
     }
 
     // getters and setters
-    public Long getEmailId() {
-        return emailId;
+    public Email getEmail() {
+        return email;
     }
 
-    public void setEmailId(Long emailId) {
-        this.emailId = emailId;
+    public void setEmail(Email email) {
+        this.email = email;
     }
 
-    public Long getContactId() {
-        return contactId;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContactId(Long contactId) {
-        this.contactId = contactId;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
     public EmailRecipientType getType() {

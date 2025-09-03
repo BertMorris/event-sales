@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.event;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +68,9 @@ public class Event {
     private List<Function> functions = new ArrayList<>();
 
     @CreationTimestamp(source = SourceType.DB)
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
     // constructors
     public Event() {}
@@ -188,11 +188,11 @@ public class Event {
         this.functions.add(function);
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
@@ -216,8 +216,8 @@ public class Event {
         private EventType type;
         private Venue venue;
         private List<Function> functions;
-        private Instant createdAt;
-        private Instant updatedAt;
+        private OffsetDateTime createdAt;
+        private OffsetDateTime updatedAt;
 
 
         public Builder id(Long id) {
@@ -300,13 +300,13 @@ public class Event {
         }
         
         
-        public Builder createdAt(Instant createdAt) {
+        public Builder createdAt(OffsetDateTime createdAt) {
             this.createdAt = createdAt;
             return this;
         }
         
         
-        public Builder updatedAt(Instant updatedAt) {
+        public Builder updatedAt(OffsetDateTime updatedAt) {
             this.updatedAt = updatedAt;
             return this;
         }

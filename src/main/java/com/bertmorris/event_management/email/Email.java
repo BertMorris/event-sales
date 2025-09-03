@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.email;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +39,9 @@ public class Email {
     private String body;
     private String conversationId;
     private boolean hasAttachments;
-    private Instant readAt;
-    private Instant receivedAt;
-    private Instant sentAt;
+    private OffsetDateTime readAt;
+    private OffsetDateTime receivedAt;
+    private OffsetDateTime sentAt;
 
     @ManyToOne
     @JoinColumn(name = "sender_id")
@@ -52,25 +52,28 @@ public class Email {
     
     
     @CreationTimestamp(source = SourceType.DB)
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
     // constructors
     public Email() {}
     
     // add recipients
     public void addToRecipient(Contact recipient) {
-        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.TO));
+        this.recipients.add(new EmailRecipient(this, recipient, EmailRecipientType.TO));
     }
+
     public void addCcRecipient(Contact recipient) {
-        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.CC));
+        this.recipients.add(new EmailRecipient(this, recipient, EmailRecipientType.CC));
     }
+
     public void addBccRecipient(Contact recipient) {
-        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.BCC));
+        this.recipients.add(new EmailRecipient(this, recipient, EmailRecipientType.BCC));
     }
+
     public void addReplyTo(Contact recipient) {
-        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.REPLY_TO));
+        this.recipients.add(new EmailRecipient(this, recipient, EmailRecipientType.REPLY_TO));
     }
 
     // getters and setters
@@ -110,27 +113,27 @@ public class Email {
         this.hasAttachments = hasAttachments;
     }
 
-    public Instant getReadAt() {
+    public OffsetDateTime getReadAt() {
         return readAt;
     }
 
-    public void setReadAt(Instant readAt) {
+    public void setReadAt(OffsetDateTime readAt) {
         this.readAt = readAt;
     }
 
-    public Instant getReceivedAt() {
+    public OffsetDateTime getReceivedAt() {
         return receivedAt;
     }
 
-    public void setReceivedAt(Instant receivedAt) {
+    public void setReceivedAt(OffsetDateTime receivedAt) {
         this.receivedAt = receivedAt;
     }
 
-    public Instant getSentAt() {
+    public OffsetDateTime getSentAt() {
         return sentAt;
     }
 
-    public void setSentAt(Instant sentAt) {
+    public void setSentAt(OffsetDateTime sentAt) {
         this.sentAt = sentAt;
     }
 
@@ -150,11 +153,11 @@ public class Email {
         this.recipients = recipients;
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return updatedAt;
     }
     

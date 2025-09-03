@@ -1,6 +1,6 @@
 package com.bertmorris.event_management.user;
 
-import java.time.Instant;
+import java.time.OffsetDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
@@ -24,9 +24,9 @@ public class User {
     private String syncKey;
 
     @CreationTimestamp(source = SourceType.DB)
-    private Instant createdAt;
+    private OffsetDateTime createdAt;
     @UpdateTimestamp(source = SourceType.DB)
-    private Instant updatedAt;
+    private OffsetDateTime updatedAt;
 
     // constructors
     public User() {}
@@ -65,11 +65,11 @@ public class User {
         this.syncKey = syncKey;
     }
 
-    public Instant getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Instant getUpdatedAt() {
+    public OffsetDateTime getUpdatedAt() {
         return this.updatedAt;
     }
 
@@ -82,14 +82,14 @@ public class User {
         private Long id;
         private String providerId;
         private String syncKey;
-        private Instant createdAt;
-        private Instant updatedAt;
+        private OffsetDateTime createdAt;
+        private OffsetDateTime updatedAt;
 
         public Builder id(Long id) { this.id = id; return this; }
         public Builder providerId(String providerId) { this.providerId = providerId; return this; }
         public Builder syncKey(String syncKey) { this.syncKey = syncKey; return this; }
-        public Builder createdAt(Instant createdAt) { this.createdAt = createdAt; return this; }
-        public Builder updatedAt(Instant updatedAt) { this.updatedAt = updatedAt; return this; }
+        public Builder createdAt(OffsetDateTime createdAt) { this.createdAt = createdAt; return this; }
+        public Builder updatedAt(OffsetDateTime updatedAt) { this.updatedAt = updatedAt; return this; }
 
         public User build() {
             User user = new User();
