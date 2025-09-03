@@ -8,6 +8,8 @@ import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.bertmorris.event_management.contact.Contact;
+import com.bertmorris.event_management.email.recipient.EmailRecipient;
+import com.bertmorris.event_management.email.recipient.EmailRecipientType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,9 +17,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -37,7 +38,7 @@ public class Email {
     private String body;
     private String conversationId;
     private boolean hasAttachments;
-    private boolean isRead;
+    private Instant readAt;
     private Instant receivedAt;
     private Instant sentAt;
 
@@ -45,21 +46,9 @@ public class Email {
     @JoinColumn(name = "sender_id")
     private Contact sender;
 
-    @ManyToMany
-    @JoinTable(name = "email_to_recipients", joinColumns = @JoinColumn(name = "email_id"), inverseJoinColumns = @JoinColumn(name = "contact_id"))
-    private List<Contact> toRecipients;
-
-    @ManyToMany
-    @JoinTable(name = "email_cc_recipients", joinColumns = @JoinColumn(name = "email_id"), inverseJoinColumns = @JoinColumn(name = "contact_id"))
-    private List<Contact> ccRecipients;
-
-    @ManyToMany
-    @JoinTable(name = "email_bcc_recipients", joinColumns = @JoinColumn(name = "email_id"), inverseJoinColumns = @JoinColumn(name = "contact_id"))
-    private List<Contact> bccRecipients;
-
-    @ManyToMany
-    @JoinTable(name = "email_reply_to", joinColumns = @JoinColumn(name = "email_id"), inverseJoinColumns = @JoinColumn(name = "contact_id"))
-    private List<Contact> replyTo;
+    @OneToMany(mappedBy = "email")
+    private List<EmailRecipient> recipients;
+    
     
     @CreationTimestamp(source = SourceType.DB)
     private Instant createdAt;
@@ -71,16 +60,16 @@ public class Email {
     
     // add recipients
     public void addToRecipient(Contact recipient) {
-        this.toRecipients.add(recipient);
+        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.TO));
     }
     public void addCcRecipient(Contact recipient) {
-        this.ccRecipients.add(recipient);
+        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.CC));
     }
     public void addBccRecipient(Contact recipient) {
-        this.bccRecipients.add(recipient);
+        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.BCC));
     }
     public void addReplyTo(Contact recipient) {
-        this.replyTo.add(recipient);
+        this.recipients.add(new EmailRecipient(this.id, recipient.getId(), EmailRecipientType.REPLY_TO));
     }
 
     // getters and setters
@@ -120,12 +109,12 @@ public class Email {
         this.hasAttachments = hasAttachments;
     }
 
-    public boolean isRead() {
-        return isRead;
+    public Instant getReadAt() {
+        return readAt;
     }
 
-    public void setIsRead(boolean isRead) {
-        this.isRead = isRead;
+    public void setReadAt(Instant readAt) {
+        this.readAt = readAt;
     }
 
     public Instant getReceivedAt() {
@@ -152,36 +141,12 @@ public class Email {
         this.sender = sender;
     }
 
-    public List<Contact> getToRecipients() {
-        return toRecipients;
+    public List<EmailRecipient> getRecipients() {
+        return recipients;
     }
 
-    public void setToRecipients(List<Contact> toRecipients) {
-        this.toRecipients = toRecipients;
-    }
-
-    public List<Contact> getCcRecipients() {
-        return ccRecipients;
-    }
-
-    public void setCcRecipients(List<Contact> ccRecipients) {
-        this.ccRecipients = ccRecipients;
-    }
-
-    public List<Contact> getBccRecipients() {
-        return bccRecipients;
-    }
-
-    public void setBccRecipients(List<Contact> bccRecipients) {
-        this.bccRecipients = bccRecipients;
-    }
-
-    public List<Contact> getReplyTo() {
-        return replyTo;
-    }
-
-    public void setReplyTo(List<Contact> replyTo) {
-        this.replyTo = replyTo;
+    public void setRecipients(List<EmailRecipient> recipients) {
+        this.recipients = recipients;
     }
 
     public Instant getCreatedAt() {
