@@ -15,7 +15,7 @@ import com.bertmorris.event_management.email.recipient.dto.EmailRecipientRespons
 public interface EmailRecipientMapper {
     
     @Mapping(target = "contactId", source = "contact.id")
-    EmailRecipientResponseDto toReponseDto(EmailRecipient recipient);
+    EmailRecipientResponseDto toResponseDto(EmailRecipient recipient);
 
     @Mapping(target = "contact", source = "emailAddress")
     EmailRecipient toEntity(EmailRecipientCreateDto emailRecipientCreateDto, @Context Map<String, Contact> contactMap);

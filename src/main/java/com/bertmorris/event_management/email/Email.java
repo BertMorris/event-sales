@@ -81,6 +81,14 @@ public class Email {
         return id;
     }
 
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
+
     public String getSubject() {
         return subject;
     }
