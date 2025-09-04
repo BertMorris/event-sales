@@ -7,7 +7,8 @@ import com.bertmorris.event_management.event.function.type.dto.FunctionTypeRespo
 import com.bertmorris.event_management.venue.dto.VenueResponseDto;
 
 public record FunctionResponseDto(
-    Long id, 
+    String id,
+    String eventId, 
     OffsetDateTime startTime,
     OffsetDateTime endTime,
     Integer guests,
