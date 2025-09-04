@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.bertmorris.event_management.contact.Contact;
+import com.bertmorris.event_management.contact.util.ContactTestBuilder;
 import com.bertmorris.event_management.email.Email;
 import com.bertmorris.event_management.email.recipient.EmailRecipient;
+import com.bertmorris.event_management.email.recipient.EmailRecipientType;
 
 public class EmailTestBuilder {
    
@@ -33,7 +35,8 @@ public class EmailTestBuilder {
             .withHasAttachments(false)
             .withReadAt(OffsetDateTime.now())
             .withReceivedAt(OffsetDateTime.now())
-            .withSentAt(OffsetDateTime.now());
+            .withSentAt(OffsetDateTime.now())
+            .withSender(ContactTestBuilder.aContact().build());
     }
 
     public Email build() {
@@ -48,7 +51,21 @@ public class EmailTestBuilder {
         email.setReceivedAt(this.receivedAt);
         email.setSentAt(this.sentAt);
         email.setSender(this.sender);
-        email.setRecipients(this.recipients);
+        if (this.recipients != null) {
+            for (EmailRecipient recipient : this.recipients) {
+                recipient.setEmail(email);
+            }
+
+            email.setRecipients(this.recipients);
+        } else {
+            EmailRecipient recipient = new EmailRecipient();
+            ReflectionTestUtils.setField(recipient, "id", 1L);
+            recipient.setType(EmailRecipientType.TO);
+            recipient.setEmail(email);
+            recipient.setContact(ContactTestBuilder.aContact().build());
+
+            email.setRecipients(List.of(recipient));
+        }
        
         return email;
     }

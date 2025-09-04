@@ -1,9 +1,12 @@
 package com.bertmorris.event_management.email;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.bertmorris.event_management.contact.Contact;
 import com.bertmorris.event_management.email.dto.EmailCreateDto;
 import com.bertmorris.event_management.email.provider.EmailClientFactory;
 import com.bertmorris.event_management.email.provider.EmailProvider;
@@ -42,7 +45,9 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public void createEmail(EmailCreateDto emailCreateDto) {
-        Email email = emailMapper.toEntity(emailCreateDto);
+        Map<String, Contact> contactMap = new HashMap<>();
+        
+        Email email = emailMapper.toEntity(emailCreateDto, contactMap);
 
         emailRepository.save(email);
     }
