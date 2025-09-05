@@ -10,7 +10,6 @@ import com.bertmorris.event_management.event.function.setup.FunctionSetup;
 import com.bertmorris.event_management.event.function.setup.util.FunctionSetupTestBuilder;
 import com.bertmorris.event_management.event.function.type.FunctionType;
 import com.bertmorris.event_management.event.function.type.util.FunctionTypeTestBuilder;
-import com.bertmorris.event_management.event.util.EventTestBuilder;
 import com.bertmorris.event_management.user.User;
 import com.bertmorris.event_management.user.util.UserTestBuilder;
 import com.bertmorris.event_management.venue.Venue;

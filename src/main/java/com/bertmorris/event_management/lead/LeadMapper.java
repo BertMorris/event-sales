@@ -26,8 +26,10 @@ public interface LeadMapper {
 
     List<LeadResponseDto> toResponseDtos(List<Lead> leads);
 
+    @Mapping(source = "ownerId", target = "ownerId")
     LeadCreateDto toCreateDto(Long ownerId, LeadCreateRequestDto request);
 
+    @Mapping(source = "id", target = "id")
     LeadUpdateDto toUpdateDto(Long id, LeadUpdateRequestDto request);
 
 }

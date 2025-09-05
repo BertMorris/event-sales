@@ -30,7 +30,8 @@ import com.bertmorris.event_management.user.UserMapperImpl;
 import com.bertmorris.event_management.venue.VenueMapperImpl;
 
 @ExtendWith(SpringExtension.class)
-@Import({EventMapperImpl.class,
+@Import({
+    EventMapperImpl.class,
     EventTypeMapperImpl.class,
     FunctionMapperImpl.class,
     FunctionTypeMapperImpl.class,
