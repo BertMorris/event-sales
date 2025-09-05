@@ -18,12 +18,10 @@ import com.bertmorris.event_management.lead.dto.LeadUpdateRequestDto;
 import com.bertmorris.event_management.lead.util.LeadCreateRequestDtoTestBuilder;
 import com.bertmorris.event_management.lead.util.LeadTestBuilder;
 import com.bertmorris.event_management.lead.util.LeadUpdateRequestDtoTestBuilder;
-import com.bertmorris.event_management.user.UserMapperImpl;
 
 @ExtendWith(SpringExtension.class)
 @Import({
     LeadMapperImpl.class,
-    UserMapperImpl.class,
     ContactMapperImpl.class
 })
 public class LeadMapperTest {

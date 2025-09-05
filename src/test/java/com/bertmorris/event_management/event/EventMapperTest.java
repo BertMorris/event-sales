@@ -22,11 +22,8 @@ import com.bertmorris.event_management.event.function.FunctionMapperImpl;
 import com.bertmorris.event_management.event.function.setup.FunctionSetupMapperImpl;
 import com.bertmorris.event_management.event.function.type.FunctionTypeMapperImpl;
 import com.bertmorris.event_management.event.type.EventTypeMapperImpl;
-import com.bertmorris.event_management.event.util.EventCreateDtoTestBuilder;
 import com.bertmorris.event_management.event.util.EventTestBuilder;
-import com.bertmorris.event_management.event.util.EventUpdateDtoTestBuilder;
 import com.bertmorris.event_management.lead.LeadMapperImpl;
-import com.bertmorris.event_management.user.UserMapperImpl;
 import com.bertmorris.event_management.venue.VenueMapperImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -37,7 +34,6 @@ import com.bertmorris.event_management.venue.VenueMapperImpl;
     FunctionTypeMapperImpl.class,
     FunctionSetupMapperImpl.class,
     LeadMapperImpl.class,
-    UserMapperImpl.class,
     ContactMapperImpl.class, 
     VenueMapperImpl.class
 })

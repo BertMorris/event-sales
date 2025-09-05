@@ -16,10 +16,9 @@ import com.bertmorris.event_management.event.dto.EventUpdateRequestDto;
 import com.bertmorris.event_management.event.function.FunctionMapper;
 import com.bertmorris.event_management.event.type.EventTypeMapper;
 import com.bertmorris.event_management.lead.LeadMapper;
-import com.bertmorris.event_management.user.UserMapper;
 import com.bertmorris.event_management.venue.VenueMapper;
 
-@Mapper(componentModel = "spring", uses = { UserMapper.class, ContactMapper.class, LeadMapper.class, EventTypeMapper.class, VenueMapper.class, FunctionMapper.class })
+@Mapper(componentModel = "spring", uses = { ContactMapper.class, LeadMapper.class, EventTypeMapper.class, VenueMapper.class, FunctionMapper.class })
 public interface EventMapper {
 
     EventCreateDto toCreateDto(EventCreateRequestDto dto);
