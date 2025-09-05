@@ -1,7 +1,5 @@
 package com.bertmorris.event_management.user.util;
 
-import java.time.OffsetDateTime;
-
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.bertmorris.event_management.user.User;
