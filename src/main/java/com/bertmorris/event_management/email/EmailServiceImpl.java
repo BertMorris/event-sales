@@ -36,9 +36,10 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public List<Email> getEmails(User user) {
+    public List<Email> getEmails(String providerId) {
+        User user = userService.getOrCreateUser(providerId);
         // TODO: should only be user sender / recipients emails
-        return emailRepository.findAll();
+        return emailRepository.findAll(); // emailRepository.findByUser(user)
     }
 
     @Override
@@ -53,7 +54,9 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void syncEmails(User user,String oboToken) {
+    public void syncEmails(String providerId, String oboToken) {
+        User user = userService.getOrCreateUser(providerId);
+
         if (user.getSyncKey() != null && !user.getSyncKey().isBlank()) {
             emailProvider.syncEmails(oboToken, user.getSyncKey(), user.getId());
         } else {

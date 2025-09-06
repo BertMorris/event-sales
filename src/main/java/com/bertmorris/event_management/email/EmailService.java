@@ -7,15 +7,14 @@ import java.util.Set;
 import com.bertmorris.event_management.contact.Contact;
 import com.bertmorris.event_management.contact.dto.ContactInfoDto;
 import com.bertmorris.event_management.email.dto.EmailCreateDto;
-import com.bertmorris.event_management.user.User;
 
 public interface EmailService {
     
-    List<Email> getEmails(User user);
+    List<Email> getEmails(String providerId);
 
     void createEmail(EmailCreateDto emailCreateDto);
 
-    void syncEmails(User user, String oboToken);
+    void syncEmails(String providerId, String oboToken);
 
     Set<ContactInfoDto> extractContactInfoDtos(List<EmailCreateDto> emailCreateDtos);
 
