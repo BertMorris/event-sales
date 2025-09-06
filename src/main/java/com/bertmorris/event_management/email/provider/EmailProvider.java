@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import com.microsoft.graph.users.item.mailfolders.item.messages.delta.DeltaGetResponse;
-import com.bertmorris.event_management.email.EmailService;
 import com.microsoft.graph.models.Message;
 import com.microsoft.graph.serviceclient.GraphServiceClient;
 
@@ -23,7 +22,7 @@ public class EmailProvider {
         this.applicationEventPublisher = applicationEventPublisher;
     }
     
-    public String syncEmails(String oboToken, String syncKey) {
+    public void syncEmails(String oboToken, String syncKey, Long userId) {
         GraphServiceClient graphClient = emailClientFactory.getGraphServiceClient(oboToken);
 
         DeltaGetResponse response =  graphClient.me()
@@ -41,28 +40,38 @@ public class EmailProvider {
                 requestConfiguration.queryParameters.top = 50;
             });
 
-        while (response.getValue() != null) {
+        while (response != null) {
             final List<Message> messages = response.getValue();
-            if (messages != null && !messages.isEmpty()) {
+            final String nextLink = response.getOdataNextLink(); // graph response will only have next OR delta link, not both
+            final String deltaLink = response.getOdataDeltaLink();
+
+            if (nextLink != null && !nextLink.isBlank()) {
+                if (messages != null && !messages.isEmpty()) {
+                    applicationEventPublisher.publishEvent(
+                        new EmailBatchSyncedEvent(
+                            emailProviderMapper.toEmailCreateDtos(messages),
+                            userId,
+                            null
+                            )
+                        );
+                }
+                response = graphClient.me().mailFolders().byMailFolderId("inbox").messages().delta().withUrl(nextLink).get();
+
+            } else if (deltaLink != null && !deltaLink.isBlank()) {
                 applicationEventPublisher.publishEvent(
                     new EmailBatchSyncedEvent(
-                        emailProviderMapper.toEmailCreateDtos(messages))
+                        emailProviderMapper.toEmailCreateDtos(messages),
+                        userId,
+                        deltaLink)
                 );
-            }
-       
-            final String nextLink = response.getOdataNextLink();
-            if (nextLink == null || nextLink.isBlank()) {
-                break;
             } else {
-                response = graphClient.me().mailFolders().byMailFolderId("inbox").messages().delta().withUrl(nextLink).get();
+                throw new IllegalStateException("No next link or delta link found");
             }
         }
-        
-        return response.getOdataDeltaLink();
     }
 
     // TODO: think about how to better handle initial vs delta sync
-    public String syncEmails(String oboToken) {
+    public void syncEmails(String oboToken, Long userId) {
         GraphServiceClient graphClient = emailClientFactory.getGraphServiceClient(oboToken);
 
         DeltaGetResponse response =  graphClient.me()
@@ -79,25 +88,33 @@ public class EmailProvider {
                 requestConfiguration.queryParameters.top = 50;
             });
 
-        while (response.getValue() != null) {
+        while (response != null) {
             final List<Message> messages = response.getValue();
-            if (messages != null && !messages.isEmpty()) {
+            final String nextLink = response.getOdataNextLink(); // graph response will only have next OR delta link, not both
+            final String deltaLink = response.getOdataDeltaLink();
+
+            if (nextLink != null && !nextLink.isBlank()) {
+                if (messages != null && !messages.isEmpty()) {
+                    applicationEventPublisher.publishEvent(
+                        new EmailBatchSyncedEvent(
+                            emailProviderMapper.toEmailCreateDtos(messages),
+                            userId,
+                            null
+                            )
+                        );
+                }
+                response = graphClient.me().mailFolders().byMailFolderId("inbox").messages().delta().withUrl(nextLink).get();
+
+            } else if (deltaLink != null && !deltaLink.isBlank()) {
                 applicationEventPublisher.publishEvent(
                     new EmailBatchSyncedEvent(
-                        emailProviderMapper.toEmailCreateDtos(messages))
+                        emailProviderMapper.toEmailCreateDtos(messages),
+                        userId,
+                        deltaLink)
                 );
-            }
-       
-            final String nextLink = response.getOdataNextLink();
-            if (nextLink == null || nextLink.isBlank()) {
-                break;
             } else {
-                response = graphClient.me().mailFolders().byMailFolderId("inbox").messages().delta().withUrl(nextLink).get();
+                throw new IllegalStateException("No next link or delta link found");
             }
         }
-        
-        return response.getOdataDeltaLink(); 
     }
-
-
 }

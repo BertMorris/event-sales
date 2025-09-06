@@ -41,6 +41,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public void updateSyncKey(Long userId, String syncKey) {
+        User user = getUserById(userId);
+        user.setSyncKey(syncKey);
+        userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
     public void updateSyncKey(String providerId, String syncKey) {
         User user = getUserByProviderId(providerId);
         user.setSyncKey(syncKey);

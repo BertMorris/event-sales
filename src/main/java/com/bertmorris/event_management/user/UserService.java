@@ -12,6 +12,8 @@ public interface UserService {
 
     String getSyncKey(String providerId);
 
+    void updateSyncKey(Long userId, String syncKey);
+
     void updateSyncKey(String providerId, String syncKey);
 
 }
