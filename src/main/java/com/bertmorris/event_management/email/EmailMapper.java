@@ -27,4 +27,6 @@ public interface EmailMapper {
     @Mapping(target = "sender", source = "senderEmail", qualifiedByName = "mapEmailAddressToContact")
     Email toEntity(EmailCreateDto emailCreateDto, @Context Map<String, Contact> contactMap);
 
+    List<Email> toEntities(List<EmailCreateDto> emailCreateDtos, @Context Map<String, Contact> contactMap);
+
 }

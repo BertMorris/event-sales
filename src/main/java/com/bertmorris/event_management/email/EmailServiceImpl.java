@@ -59,7 +59,7 @@ public class EmailServiceImpl implements EmailService {
         emailRepository.save(email);
     }
 
-    private String sync(String oboToken, String syncKey) {
+    private void sync(String oboToken, String syncKey) {
         Map<String, Contact> contactMap = new HashMap<>();
 
         String newSyncKey = emailProvider.sync(oboToken, syncKey, dtos -> {
@@ -69,8 +69,6 @@ public class EmailServiceImpl implements EmailService {
             List<Email> emails = emailMapper.toEntities(emailCreateDtos, contactMap);
             emailRepository.saveAll(emails);
         });
-
-        return newSyncKey;
     }
 
     private String batchSync(String oboToken) {
@@ -78,7 +76,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
 
-    private Set<ContactInfoDto> extractContactInfoDtos(List<EmailCreateDto> emailCreateDtos) {
+    public Set<ContactInfoDto> extractContactInfoDtos(List<EmailCreateDto> emailCreateDtos) {
         Set<ContactInfoDto> contactInfoDtos = new HashSet<>();
 
         for (EmailCreateDto emailCreateDto : emailCreateDtos) {
@@ -89,7 +87,7 @@ public class EmailServiceImpl implements EmailService {
         return contactInfoDtos;
     }
 
-    private void updateContactCache(Map<String, Contact> contactMap, Set<ContactInfoDto> contactInfoDtos) {
+    public void updateContactCache(Map<String, Contact> contactMap, Set<ContactInfoDto> contactInfoDtos) {
         for (ContactInfoDto contactInfoDto : contactInfoDtos) {
             Contact contact = contactMap.get(contactInfoDto.emailAddress());
             if (contact == null) {
