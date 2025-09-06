@@ -17,7 +17,7 @@ public interface EmailRecipientMapper {
     @Mapping(target = "contactId", source = "contact.id")
     EmailRecipientResponseDto toResponseDto(EmailRecipient recipient);
 
-    @Mapping(target = "contact", source = "emailAddress", qualifiedByName = "mapEmailAddressToContact")
+    @Mapping(target = "contact", source = "contactInfo", qualifiedByName = "mapContactInfoToContact")
     EmailRecipient toEntity(EmailRecipientCreateDto emailRecipientCreateDto, @Context Map<String, Contact> contactMap);
 
 }

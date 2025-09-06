@@ -7,6 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
+import com.bertmorris.event_management.contact.dto.ContactInfoDto;
 import com.bertmorris.event_management.contact.dto.ContactResponseDto;
 
 
@@ -14,6 +15,13 @@ import com.bertmorris.event_management.contact.dto.ContactResponseDto;
 public interface ContactMapper {
 
     ContactResponseDto toResponseDto(Contact contact);
+
+    @Named("mapContactInfoToContact")
+    default Contact toEntity(ContactInfoDto contactInfo, @Context Map<String, Contact> contactMap) {
+        Contact contact = contactMap.get(contactInfo.emailAddress());
+
+        return contact;
+    }
 
     // not sure if this is really needed
     @Named("mapEmailAddressToContact")
