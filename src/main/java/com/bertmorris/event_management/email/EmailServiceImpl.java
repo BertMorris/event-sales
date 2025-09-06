@@ -36,45 +36,40 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public List<Email> getEmails(String providerId, String oboToken) {
-        User user = userService.getOrCreateUser(providerId);
-
-        if (user.getSyncKey() == null) {
-            String newSyncKey = batchSync(oboToken);
-            user.updateSyncKey(newSyncKey);
-        } else {
-            String newSyncKey = sync(oboToken, user.getSyncKey());
-            user.updateSyncKey(newSyncKey);
-        }
-        
+    public List<Email> getEmails(User user) {
+        // TODO: should only be user sender / recipients emails
         return emailRepository.findAll();
     }
 
     @Override
     public void createEmail(EmailCreateDto emailCreateDto) {
         Map<String, Contact> contactMap = new HashMap<>();
+        Set<ContactInfoDto> contactInfoDtos = extractContactInfoDtos(emailCreateDto);
+        updateContactCache(contactMap, contactInfoDtos);
         
         Email email = emailMapper.toEntity(emailCreateDto, contactMap);
 
         emailRepository.save(email);
     }
 
-    private void sync(String oboToken, String syncKey) {
-        Map<String, Contact> contactMap = new HashMap<>();
-
-        String newSyncKey = emailProvider.sync(oboToken, syncKey, dtos -> {
-            List<EmailCreateDto> emailCreateDtos = dtos;
-            Set<ContactInfoDto> contactInfoDtos = extractContactInfoDtos(emailCreateDtos);
-            updateContactCache(contactMap, contactInfoDtos);
-            List<Email> emails = emailMapper.toEntities(emailCreateDtos, contactMap);
-            emailRepository.saveAll(emails);
-        });
+    @Override
+    public void syncEmails(User user,String oboToken) {
+        if (user.getSyncKey() != null && !user.getSyncKey().isBlank()) {
+            emailProvider.syncEmails(oboToken, user.getSyncKey(), user.getId());
+        } else {
+            emailProvider.fullSyncEmails(oboToken, user.getId());
+           
+        }
     }
 
-    private String batchSync(String oboToken) {
-        return "newSyncKey";
-    }
+    public Set<ContactInfoDto> extractContactInfoDtos(EmailCreateDto emailCreateDto) {
+        Set<ContactInfoDto> contactInfoDtos = new HashSet<>();
 
+        contactInfoDtos.add(emailCreateDto.sender());
+        contactInfoDtos.addAll(emailCreateDto.recipients().stream().map(EmailRecipientCreateDto::contactInfo).collect(Collectors.toSet()));
+        
+        return contactInfoDtos;
+    }
 
     public Set<ContactInfoDto> extractContactInfoDtos(List<EmailCreateDto> emailCreateDtos) {
         Set<ContactInfoDto> contactInfoDtos = new HashSet<>();
@@ -89,12 +84,10 @@ public class EmailServiceImpl implements EmailService {
 
     public void updateContactCache(Map<String, Contact> contactMap, Set<ContactInfoDto> contactInfoDtos) {
         for (ContactInfoDto contactInfoDto : contactInfoDtos) {
-            Contact contact = contactMap.get(contactInfoDto.emailAddress());
-            if (contact == null) {
-                contact = contactService.getOrCreateContact(contactInfoDto.name(), contactInfoDto.emailAddress());
+            if (contactMap.get(contactInfoDto.emailAddress()) == null) {
+                Contact contact = contactService.getOrCreateContact(contactInfoDto.name(), contactInfoDto.emailAddress());
+                contactMap.put(contactInfoDto.emailAddress(), contact);
             }
-
-            contactMap.put(contactInfoDto.emailAddress(), contact);
         }
     }
 

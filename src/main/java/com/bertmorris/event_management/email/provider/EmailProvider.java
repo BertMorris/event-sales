@@ -71,7 +71,7 @@ public class EmailProvider {
     }
 
     // TODO: think about how to better handle initial vs delta sync
-    public void syncEmails(String oboToken, Long userId) {
+    public void fullSyncEmails(String oboToken, Long userId) {
         GraphServiceClient graphClient = emailClientFactory.getGraphServiceClient(oboToken);
 
         DeltaGetResponse response =  graphClient.me()
