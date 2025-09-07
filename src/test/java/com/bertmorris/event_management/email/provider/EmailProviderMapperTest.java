@@ -32,16 +32,14 @@ public class EmailProviderMapperTest {
 
         assertNotNull(emailCreateDto);
         assertEquals(message.getId(), emailCreateDto.providerId());
-        assertEquals(message.getSender().getEmailAddress().getName(), emailCreateDto.senderName());
-        assertEquals(message.getSender().getEmailAddress().getAddress(), emailCreateDto.senderEmail());
+        assertEquals(message.getSender().getEmailAddress().getName(), emailCreateDto.sender().name());
+        assertEquals(message.getSender().getEmailAddress().getAddress(), emailCreateDto.sender().emailAddress());
         assertEquals(message.getSubject(), emailCreateDto.subject());
         assertEquals(message.getBody().getContent(), emailCreateDto.body());
         assertEquals(message.getConversationId(), emailCreateDto.conversationId());
         assertEquals(message.getHasAttachments(), emailCreateDto.hasAttachments());
         assertEquals(message.getReceivedDateTime(), emailCreateDto.receivedAt());
         assertEquals(message.getSentDateTime(), emailCreateDto.sentAt());
-        assertEquals(message.getSender().getEmailAddress().getName(), emailCreateDto.senderName());
-        assertEquals(message.getSender().getEmailAddress().getAddress(), emailCreateDto.senderEmail());
         assertEquals(
             message.getToRecipients().size() + message.getCcRecipients().size() + message.getBccRecipients().size() + message.getReplyTo().size(),
             emailCreateDto.recipients().size());
@@ -93,6 +91,6 @@ public class EmailProviderMapperTest {
     }
 
     private String getFirstRecipientName(List<EmailRecipientCreateDto> dtos, EmailRecipientType type) {
-        return dtos.stream().filter(dto -> dto.type() == type).findFirst().get().name();
+        return dtos.stream().filter(dto -> dto.type() == type).findFirst().get().contactInfo().name();
     }
 }

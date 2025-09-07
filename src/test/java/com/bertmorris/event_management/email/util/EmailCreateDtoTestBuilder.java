@@ -3,6 +3,7 @@ package com.bertmorris.event_management.email.util;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+import com.bertmorris.event_management.contact.dto.ContactInfoDto;
 import com.bertmorris.event_management.email.dto.EmailCreateDto;
 import com.bertmorris.event_management.email.recipient.dto.EmailRecipientCreateDto;
 import com.bertmorris.event_management.email.recipient.util.EmailRecipientCreateDtoTestBuilder;
@@ -10,8 +11,7 @@ import com.bertmorris.event_management.email.recipient.util.EmailRecipientCreate
 public class EmailCreateDtoTestBuilder {
     
     private String providerId;
-    private String senderName;
-    private String senderEmail;
+    private ContactInfoDto sender;
     private String subject;
     private String body;
     private String conversationId;
@@ -23,8 +23,7 @@ public class EmailCreateDtoTestBuilder {
     public static EmailCreateDtoTestBuilder anEmailCreateDto() {
         return new EmailCreateDtoTestBuilder()
             .withProviderId("providerId")
-            .withSenderName("senderName")
-            .withSenderEmail("senderEmail")
+            .withSender(new ContactInfoDto("senderName", "senderEmail"))
             .withSubject("subject")
             .withBody("body")
             .withConversationId("conversationId")
@@ -37,8 +36,7 @@ public class EmailCreateDtoTestBuilder {
     public EmailCreateDto build() {
         return new EmailCreateDto(
             this.providerId,
-            this.senderName,
-            this.senderEmail,
+            this.sender,
             this.subject,
             this.body,
             this.conversationId,
@@ -53,13 +51,8 @@ public class EmailCreateDtoTestBuilder {
         return this;
     }
 
-    public EmailCreateDtoTestBuilder withSenderName(String senderName) {
-        this.senderName = senderName;
-        return this;
-    }
-    
-    public EmailCreateDtoTestBuilder withSenderEmail(String senderEmail) {
-        this.senderEmail = senderEmail;
+    public EmailCreateDtoTestBuilder withSender(ContactInfoDto sender) {
+        this.sender = sender;
         return this;
     }
 

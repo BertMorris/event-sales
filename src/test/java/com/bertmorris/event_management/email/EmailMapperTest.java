@@ -53,11 +53,11 @@ public class EmailMapperTest {
     void toEntity_shouldCreateEmailSuccessfully() {
         EmailCreateDto dto = EmailCreateDtoTestBuilder.anEmailCreateDto().build();
         Map<String, Contact> contactMap = new HashMap<>();
-        Contact sender = new Contact(dto.senderName(), dto.senderEmail());
-        contactMap.put(dto.senderEmail(), sender);
+        Contact sender = new Contact(dto.sender().name(), dto.sender().emailAddress());
+        contactMap.put(dto.sender().emailAddress(), sender);
         for (EmailRecipientCreateDto recipientDto : dto.recipients()) {
-            Contact recipient = new Contact(recipientDto.name(), recipientDto.emailAddress());
-            contactMap.put(recipientDto.emailAddress(), recipient);
+            Contact recipient = new Contact(recipientDto.contactInfo().name(), recipientDto.contactInfo().emailAddress());
+            contactMap.put(recipientDto.contactInfo().emailAddress(), recipient);
         }
 
         Email email = emailMapper.toEntity(dto, contactMap);
@@ -70,8 +70,8 @@ public class EmailMapperTest {
         assertEquals(dto.hasAttachments(), email.hasAttachments());
         assertEquals(dto.receivedAt(), email.getReceivedAt());
         assertEquals(dto.sentAt(), email.getSentAt());
-        assertEquals(dto.senderName(), email.getSender().getName());
-        assertEquals(dto.senderEmail(), email.getSender().getEmailAddress());
+        assertEquals(dto.sender().name(), email.getSender().getName());
+        assertEquals(dto.sender().emailAddress(), email.getSender().getEmailAddress());
         assertEquals(dto.recipients().size(), email.getRecipients().size());
     }
 

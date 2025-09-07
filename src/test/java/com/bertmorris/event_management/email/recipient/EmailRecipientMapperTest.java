@@ -42,8 +42,8 @@ public class EmailRecipientMapperTest {
     EmailRecipientCreateDto dto = EmailRecipientCreateDtoTestBuilder.anEmailRecipientCreateDto().build();
 
     Contact contact = ContactTestBuilder.aContact()
-        .withName(dto.name())
-        .withEmailAddress(dto.emailAddress())
+        .withName(dto.contactInfo().name())
+        .withEmailAddress(dto.contactInfo().emailAddress())
         .build();
 
     Map<String, Contact> contactMap = Map.of(contact.getEmailAddress(), contact);
@@ -52,8 +52,8 @@ public class EmailRecipientMapperTest {
 
     assertNotNull(emailRecipient);
     assertEquals(contact.getId(), emailRecipient.getContact().getId());
-    assertEquals(dto.name(), emailRecipient.getContact().getName());
-    assertEquals(dto.emailAddress(), emailRecipient.getContact().getEmailAddress());
+    assertEquals(dto.contactInfo().name(), emailRecipient.getContact().getName());
+    assertEquals(dto.contactInfo().emailAddress(), emailRecipient.getContact().getEmailAddress());
     assertEquals(dto.type(), emailRecipient.getType());
     }
 }

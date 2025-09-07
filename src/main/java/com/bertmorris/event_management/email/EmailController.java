@@ -29,10 +29,8 @@ public class EmailController {
     @GetMapping
     public ResponseEntity<List<EmailResponseDto>> getEmails(@AuthenticationPrincipal Jwt jwt) {
         String providerId = jwt.getClaimAsString("oid");
-        String oboToken = jwt.getTokenValue();
 
-
-        List<Email> emails = emailService.getEmails(providerId, oboToken);
+        List<Email> emails = emailService.getEmails(providerId);
         List<EmailResponseDto> emailResponseDtos = emailMapper.toResponseDtos(emails);
 
         return ResponseEntity.ok(emailResponseDtos);

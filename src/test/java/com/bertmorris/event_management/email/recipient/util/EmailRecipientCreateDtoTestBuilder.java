@@ -1,5 +1,6 @@
 package com.bertmorris.event_management.email.recipient.util;
 
+import com.bertmorris.event_management.contact.dto.ContactInfoDto;
 import com.bertmorris.event_management.email.recipient.EmailRecipientType;
 import com.bertmorris.event_management.email.recipient.dto.EmailRecipientCreateDto;
 
@@ -17,7 +18,8 @@ public class EmailRecipientCreateDtoTestBuilder {
     }
 
     public EmailRecipientCreateDto build() {
-        return new EmailRecipientCreateDto(this.name, this.emailAddress, this.type);
+        ContactInfoDto contactInfo = new ContactInfoDto(this.name, this.emailAddress);
+        return new EmailRecipientCreateDto(contactInfo, this.type);
     }
 
     public EmailRecipientCreateDtoTestBuilder withName(String name) {

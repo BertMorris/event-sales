@@ -16,7 +16,7 @@ public interface ContactMapper {
 
     ContactResponseDto toResponseDto(Contact contact);
 
-    @Named("mapContactInfoToContact")
+    @Named("mapContactInfoDtoToContact")
     default Contact toEntity(ContactInfoDto contactInfo, @Context Map<String, Contact> contactMap) {
         Contact contact = contactMap.get(contactInfo.emailAddress());
 

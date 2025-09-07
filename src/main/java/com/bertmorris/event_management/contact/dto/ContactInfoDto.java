@@ -7,4 +7,7 @@ public record ContactInfoDto(
     @NotNull String emailAddress,
     String company
 ) {
+    public ContactInfoDto(String name, String emailAddress) {
+        this(name, emailAddress, null);
+    }
 }
