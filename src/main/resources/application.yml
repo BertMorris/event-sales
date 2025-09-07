@@ -5,7 +5,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://login.microsoftonline.com/{MICROSOFT_TENANT_ID}/v2.0/
+          issuer-uri: https://login.microsoftonline.com/${MICROSOFT_TENANT_ID}/v2.0
           audiences: ${MICROSOFT_CLIENT_ID}
 
   datasource:
