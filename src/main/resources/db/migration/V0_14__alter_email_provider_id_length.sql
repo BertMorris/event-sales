@@ -1,0 +1,2 @@
+ALTER TABLE email
+ALTER COLUMN conversation_id TYPE VARCHAR(256);

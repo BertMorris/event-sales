@@ -38,6 +38,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public List<Email> getEmails(String providerId) {
         User user = userService.getOrCreateUser(providerId);
+
         // TODO: should only be user sender / recipients emails
         return emailRepository.findAll(); // emailRepository.findByUser(user)
     }
@@ -52,6 +53,8 @@ public class EmailServiceImpl implements EmailService {
 
         emailRepository.save(email);
     }
+
+
 
     @Override
     public void syncEmails(String providerId, String oboToken) {
